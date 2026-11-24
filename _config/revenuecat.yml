@@ -1,0 +1,26 @@
+---
+Name: revenuecat
+After: '#app-backend-routes'
+---
+SilverStripe\Control\Director:
+  rules:
+    'api/v1/webhooks/revenuecat': BradTipper\AppBackend\Account\RevenueCatWebhookController
+
+SilverStripe\Security\Member:
+  extensions:
+    - BradTipper\AppBackend\Admin\MemberBillingExtension
+
+BradTipper\AppBackend\Account\RevenueCatWebhookController:
+  environment: PRODUCTION
+  entitlement_ids:
+    - pro
+  product_ids: []
+---
+Name: revenuecat-service-desk
+Only:
+  classexists: 'BradTipper\AppBackend\Admin\SupportAdmin'
+---
+# Show the subscription events next to contact messages and feedback when the service desk is installed.
+BradTipper\AppBackend\Admin\SupportAdmin:
+  managed_models:
+    - BradTipper\AppBackend\Model\RevenueCatEvent
