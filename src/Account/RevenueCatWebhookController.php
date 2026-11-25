@@ -1,15 +1,15 @@
 <?php
 
-namespace BradTipper\AppBackend\Account;
+namespace BradTipper\RestfulFramework\Account;
 
-use BradTipper\AppBackend\AppConfig;
-use BradTipper\AppBackend\Api\ApiController;
-use BradTipper\AppBackend\Api\ApiException;
+use BradTipper\RestfulFramework\AppConfig;
+use BradTipper\RestfulFramework\Api\ApiController;
+use BradTipper\RestfulFramework\Api\ApiException;
 use Ramsey\Uuid\Uuid;
-use BradTipper\AppBackend\Auth\ApiMemberExtension;
-use BradTipper\AppBackend\Model\RevenueCatEvent;
-use BradTipper\AppBackend\OpenApi\Spec;
-use BradTipper\AppBackend\Support\RevenueCatNotifications;
+use BradTipper\RestfulFramework\Auth\ApiMemberExtension;
+use BradTipper\RestfulFramework\Model\RevenueCatEvent;
+use BradTipper\RestfulFramework\OpenApi\Spec;
+use BradTipper\RestfulFramework\Support\RevenueCatNotifications;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Environment;
