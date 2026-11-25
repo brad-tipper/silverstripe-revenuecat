@@ -1,10 +1,10 @@
 <?php
 
-namespace BradTipper\AppBackend\Admin;
+namespace BradTipper\RestfulFramework\Admin;
 
-use BradTipper\AppBackend\AppConfig;
-use BradTipper\AppBackend\Auth\ApiMemberExtension;
-use BradTipper\AppBackend\Model\RevenueCatEvent;
+use BradTipper\RestfulFramework\AppConfig;
+use BradTipper\RestfulFramework\Auth\ApiMemberExtension;
+use BradTipper\RestfulFramework\Model\RevenueCatEvent;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;

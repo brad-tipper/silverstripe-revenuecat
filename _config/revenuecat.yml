@@ -1,16 +1,16 @@
 ---
 Name: revenuecat
-After: '#app-backend-routes'
+After: '#restful-framework-routes'
 ---
 SilverStripe\Control\Director:
   rules:
-    'api/v1/webhooks/revenuecat': BradTipper\AppBackend\Account\RevenueCatWebhookController
+    'api/v1/webhooks/revenuecat': BradTipper\RestfulFramework\Account\RevenueCatWebhookController
 
 SilverStripe\Security\Member:
   extensions:
-    - BradTipper\AppBackend\Admin\MemberBillingExtension
+    - BradTipper\RestfulFramework\Admin\MemberBillingExtension
 
-BradTipper\AppBackend\Account\RevenueCatWebhookController:
+BradTipper\RestfulFramework\Account\RevenueCatWebhookController:
   environment: PRODUCTION
   entitlement_ids:
     - pro
@@ -18,9 +18,9 @@ BradTipper\AppBackend\Account\RevenueCatWebhookController:
 ---
 Name: revenuecat-service-desk
 Only:
-  classexists: 'BradTipper\AppBackend\Admin\SupportAdmin'
+  classexists: 'BradTipper\RestfulFramework\Admin\SupportAdmin'
 ---
 # Show the subscription events next to contact messages and feedback when the service desk is installed.
-BradTipper\AppBackend\Admin\SupportAdmin:
+BradTipper\RestfulFramework\Admin\SupportAdmin:
   managed_models:
-    - BradTipper\AppBackend\Model\RevenueCatEvent
+    - BradTipper\RestfulFramework\Model\RevenueCatEvent

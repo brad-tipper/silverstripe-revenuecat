@@ -18,14 +18,14 @@ composer require bradtipper/silverstripe-revenuecat
 Secrets and settings are read from the framework's `AppConfig`:
 
 ```yaml
-BradTipper\AppBackend\AppConfig:
+BradTipper\RestfulFramework\AppConfig:
   revenuecat_enabled: true
   revenuecat_webhook_secret: '...'     # the Authorization bearer RevenueCat sends
   revenuecat_v2_secret_key: '...'      # for deleting customers
   revenuecat_project_id: '...'
   subscription_path: '/settings/subscription'   # link used in emails
 
-BradTipper\AppBackend\Account\RevenueCatWebhookController:
+BradTipper\RestfulFramework\Account\RevenueCatWebhookController:
   environment: PRODUCTION
   entitlement_ids: [pro]
   product_ids: []
