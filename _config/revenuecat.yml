@@ -12,6 +12,7 @@ SilverStripe\Security\Member:
 
 BradTipper\AppBackend\Account\RevenueCatWebhookController:
   environment: PRODUCTION
+  sandbox_tester_emails: []
   entitlement_ids:
     - pro
   product_ids: []
