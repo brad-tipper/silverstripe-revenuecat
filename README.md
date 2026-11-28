@@ -27,6 +27,9 @@ BradTipper\AppBackend\AppConfig:
 
 BradTipper\AppBackend\Account\RevenueCatWebhookController:
   environment: PRODUCTION
+  # Reviewers and testers: their SANDBOX events count even in production.
+  # The accounts must already exist.
+  sandbox_tester_emails: []
   entitlement_ids: [pro]
   product_ids: []
 ```

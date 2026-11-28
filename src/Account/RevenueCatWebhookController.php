@@ -24,6 +24,15 @@ class RevenueCatWebhookController extends ApiController
 
     private static string $environment = 'PRODUCTION';
 
+    /**
+     * Accounts whose SANDBOX events also count on a PRODUCTION site: store reviewers and testers,
+     * whose purchases are always sandbox ones. Everyone else's are ignored.
+     * Only list accounts that already exist, or whoever registers the address first gets this.
+     *
+     * @var string[]
+     */
+    private static array $sandbox_tester_emails = [];
+
     /** @var string[] */
     private static array $entitlement_ids = ['pro'];
 
@@ -74,7 +83,8 @@ class RevenueCatWebhookController extends ApiController
 
         $eventTs = intdiv((int) $event['event_timestamp_ms'], 1000);
         $matches = $this->matchesPro($event);
-        $sameEnvironment = $event['environment'] === self::config()->get('environment');
+        $sameEnvironment = $event['environment'] === self::config()->get('environment')
+            || $this->isSandboxTester($event);
         $status = null;
         if ($sameEnvironment && in_array($event['type'], self::ACTIVE, true) && $matches) {
             $status = 'active';
@@ -119,6 +129,20 @@ class RevenueCatWebhookController extends ApiController
             'subscriptionStatus' => $status ?? 'unchanged',
             'notified' => $notified,
         ];
+    }
+
+    /** @param array<string, mixed> $event */
+    private function isSandboxTester(array $event): bool
+    {
+        $testers = array_map(
+            static fn ($email) => strtolower(trim((string) $email)),
+            (array) self::config()->get('sandbox_tester_emails'),
+        );
+        if ($event['environment'] !== 'SANDBOX' || $testers === []) {
+            return false;
+        }
+        $member = ApiMemberExtension::findByUuid((string) $event['app_user_id']);
+        return $member && in_array(strtolower(trim((string) $member->Email)), $testers, true);
     }
 
     /** @param array<string, mixed> $event */
